@@ -1,0 +1,11 @@
+{
+    "compras": [],
+    "vendas": [
+        {
+            "produto": "brigadeiro",
+            "quantidade": 50,
+            "faturamento": 100.0,
+            "custo": 25.0
+        }
+    ]
+}
