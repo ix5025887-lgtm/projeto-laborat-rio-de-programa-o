@@ -8,6 +8,8 @@ financeiro = {}
 def limpar_tela():
     os.system("cls" if os.name == "nt" else "clear")
 
+#dados.json
+
 def carregar_dados(arquivo):
     global dados
     try:
@@ -20,6 +22,8 @@ def carregar_dados(arquivo):
 def salvar_dados(arquivo):
     with open(arquivo, "w", encoding="utf-8") as arq:
         json.dump(dados, arq, indent=4, ensure_ascii=False)
+
+#produtos.json
 
 def carregar_produtos(arquivo):
     global produtos
@@ -53,6 +57,11 @@ def listar_produtos():
             f'Custo: R$ {p["custo"]:.2f}'
         )
 
+def consultar_lista(id_produto):
+    for produto in produtos["produtos"]:
+        if produto["id"] == id_produto:
+            return produto
+    return None
 
 def editar_produto(id_produto, novo_nome, novo_preco, arquivo):
     for produto in produtos["produtos"]:
@@ -63,6 +72,17 @@ def editar_produto(id_produto, novo_nome, novo_preco, arquivo):
             print("Produto atualizado!")
             return
     print("Produto não encontrado!")
+
+def deletar_produto(id_produto, arquivo):
+    for produto in produtos["produtos"]:
+        if produto["id"] == id_produto:
+            produtos["produtos"].remove(produto)
+            salvar_produtos(arquivo)
+            print("Produto removido com sucesso!")
+            return
+    print("Produto não encontrado!")
+
+#financeiro.json
 
 def carregar_financeiro(arquivo):
     global financeiro
